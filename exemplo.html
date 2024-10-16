@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Script Loader</title>
+    <!-- Google Font: Fredoka One -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap">
+    <style>
+        body {
+            font-family: 'Fredoka One', cursive;
+            background-color: #f0f0f0;
+            text-align: center;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            margin-top: 50px;
+        }
+
+        .script-box {
+            background-color: #ffea7f;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 40px;
+            position: relative;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .image-bar {
+            width: 100%;
+            height: 150px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .code-box {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            font-size: 16px;
+            color: #333;
+            width: 90%;
+            margin: 10px auto;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        .copy-btn {
+            background-color: #ffb84d;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .copy-btn:hover {
+            background-color: #ff9933;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- First Script Box -->
+        <div class="script-box">
+            <div class="image-bar" style="background-image: url('file:///storage/emulated/0/Download/Novo%20projeto%20%5BD545F9E%5D.png');"></div>
+            <button class="copy-btn" onclick="copyToClipboard('loadstring(game:HttpGet(\'https://voltzhub.github.io/ps99\'))()')">Copy</button>
+        </div>
+
+        <!-- Second Script Box -->
+        <div class="script-box">
+            <div class="image-bar" style="background-image: url('file:///storage/emulated/0/Download/Novo%20projeto%20%5B2F8C0A7%5D.png');"></div>
+            <button class="copy-btn" onclick="copyToClipboard('loadstring(game:HttpGet(\'https://voltzhub.github.io/petsgo\'))()')">Copy</button>
+        </div>
+    </div>
+
+    <script>
+        function copyToClipboard(text) {
+            const textarea = document.createElement("textarea");
+            textarea.value = text;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand("copy");
+            document.body.removeChild(textarea);
+            alert("Script copied to clipboard!");
+        }
+    </script>
+
+</body>
+</html>
