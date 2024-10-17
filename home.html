@@ -3,131 +3,124 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VoltzHub Scripts</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-
+    <title></title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
     <style>
         body {
             margin: 0;
             padding: 0;
+            font-family: 'Montserrat', sans-serif;
             background: url('backgroundp99.png') no-repeat center center fixed;
             background-size: cover;
-            font-family: 'Montserrat', sans-serif;
         }
 
-        .header {
-            background-color: white;
-            border-radius: 25px;
-            width: 60px;
-            height: 25vh;
-            position: fixed;
-            left: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 999;
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+
+        .sidebar {
+            width: 80px;
+            background-color: rgba(255, 255, 255, 0);
             display: flex;
             justify-content: center;
             align-items: center;
+        }
+
+        .watermark {
+            width: 50px;
+            height: 50px;
+        }
+
+        .content {
+            flex: 1;
+            display: flex;
             flex-direction: column;
-            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-       }
+            justify-content: center;
+            align-items: center;
+        }
 
-       .header img {
-            width: 90px;
-            height: auto;
-       }
-
-       y1 {
-            color: #FFC61F;
-       }
-        
-       .container {
+        .script-box {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            padding: 20px;
+            width: 400px;
+            margin: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             text-align: center;
-            padding-top: 120px;
-       }
-
-       .script-card {
-           background-color: white;
-           border-radius: 25px;
-           width: 45%;
-           max-width: 500px;
-           margin: 20px auto;
-           box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-           padding: 20px;
-       }
+        }
 
         .script-image {
-            width: 110%;
-            max-width: 500px;
-            margin-left: -14px;
+            width: 100%;
+            height: auto;
             border-radius: 10px;
         }
 
-        .copy-button {
-            background: linear-gradient(90deg, #FFC417, #FFBB08);
-            border: none;
-            margin-top: -20px;
-            color: white;
-            font-size: 15px;
-            padding: 10px 20px;
-            border-radius: 50px;
-            cursor: pointer;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: bold;
-        }
-
-        .copy-button:hover {
-            opacity: 0.9;
-        }
-
-        .script-code {
-            background-color: #DBDBDB;
-            border-radius: 50px;
-            margin-top: 15px;
+        .script-text {
+            background-color: #f4f4f4;
+            border-radius: 5px;
             padding: 10px;
-            font-size: 8px;
-            font-family: 'Montserrat', sans-serif;
-            margin: 10px 0;
+            margin-top: 10px;
+            font-family: monospace;
+            font-size: 14px;
+            color: #333;
+            width: 100%;
             overflow-x: auto;
         }
+
+        .copy-btn {
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #ffbf00;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+        }
+
+        .copy-btn:hover {
+            background-color: #e6a800;
+        }
+
     </style>
 </head>
 <body>
-    <div class="header">
-        <img src="watermakrr.png" alt="Watermark">
-    </div>
 
     <div class="container">
-        <div class="script-card">
-            <img src="https://voltzhub.github.io/petsimulator99.png" alt="Pet Simulator 99 Script" class="script-image">
-            <div class="script-code" id="script1">
-                <y1>loadstring(game:HttpGet("https://voltzhub.github.io/ps99"))()</y1>
-            </div>
-            <button class="copy-button" onclick="copyScript('script1')">Copy Script!</button>
+        <div class="sidebar">
+            <img src="images/mywatermark.png" alt="Watermark" class="watermark">
         </div>
 
-        <div class="script-card">
-            <img src="https://voltzhub.github.io/petsgo.png" alt="Pets GO Script" class="script-image">
-            <div class="script-code" id="script2">
-                <y1>loadstring(game:HttpGet("https://voltzhub.github.io/petsgo"))()</y1>
+        <div class="content">
+            <div class="script-box">
+                <img src="https://voltzhub.github.io/petsgo.png" alt="PETSGO Release" class="script-image"> <!-- Replace with actual image URL -->
+                <div class="script-text" id="script1">loadstring(game:HttpGet('https://voltzHub'))()</div>
+                <button class="copy-btn" onclick="copyScript('script1')">Copy Script</button>
             </div>
-            <button class="copy-button" onclick="copyScript('script2')">Copy Script!</button>
+
+            <div class="script-box">
+                <img src="https://voltzhub.github.io/petsimulator99.png" alt="PET SIMULATOR 99 Updated" class="script-image"> <!-- Replace with actual image URL -->
+                <div class="script-text" id="script2">loadstring(game:HttpGet('https://voltzHub'))()</div>
+                <button class="copy-btn" onclick="copyScript('script2')">Copy Script</button>
+            </div>
         </div>
     </div>
 
     <script>
+        // Function to copy script text
         function copyScript(id) {
-            var scriptText = document.getElementById(id).innerText;
-            var tempInput = document.createElement('textarea');
-            tempInput.value = scriptText;
-            document.body.appendChild(tempInput);
-            tempInput.select();
-            document.execCommand('copy');
-            document.body.removeChild(tempInput);
-            alert("Script Copied! Open Roblox and Join the Game and Execute it!");
+            var copyText = document.getElementById(id);
+            var textarea = document.createElement("textarea");
+            textarea.value = copyText.innerText;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand("copy");
+            document.body.removeChild(textarea);
+            alert("Script copied to clipboard!");
         }
     </script>
+
 </body>
 </html>
