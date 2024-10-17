@@ -3,124 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <title>VoltzHub Scripts</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
     <style>
         body {
             margin: 0;
             padding: 0;
-            font-family: 'Montserrat', sans-serif;
             background: url('backgroundp99.png') no-repeat center center fixed;
             background-size: cover;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .header {
+            background-color: white;
+            width: 100%;
+            padding: 10px 0;
+            position: fixed;
+            top: 0;
+            z-index: 999;
+            display: flex;
+            justify-content: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .header img {
+            width: 150px;
         }
 
         .container {
-            display: flex;
-            height: 100vh;
-        }
-
-        .sidebar {
-            width: 40px;
-            background-color: rgba(255, 255, 255, 0);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .watermark {
-            width: 50px;
-            height: 50px;
-        }
-
-        .content {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .script-box {
-            background-color: rgba(255, 255, 255, 0.8);
-            border-radius: 15px;
-            padding: 20px;
-            width: 100px;
-            margin: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             text-align: center;
+            padding-top: 100px;
+        }
+
+        .script-card {
+            background-color: white;
+            border-radius: 15px;
+            width: 80%;
+            max-width: 500px;
+            margin: 20px auto;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
         }
 
         .script-image {
             width: 100%;
-            height: auto;
-            border-radius: 25px;
+            border-radius: 10px;
         }
 
-        .script-text {
-            background-color: #f4f4f4;
-            border-radius: 50px;
-            padding: 10px;
-            margin-top: 10px;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 14px;
-            color: #333;
-            width: 100%;
-            overflow-x: auto;
-        }
-
-        .copy-btn {
-            margin-top: 10px;
-            padding: 10px 20px;
-            background-color: #ffbf00;
-            color: white;
+        .copy-button {
+            background: linear-gradient(90deg, #FFC417, #FFBB08);
             border: none;
+            color: white;
+            font-size: 18px;
+            padding: 10px 20px;
             border-radius: 50px;
             cursor: pointer;
             font-family: 'Montserrat', sans-serif;
-            font-weight: 600;
+            font-weight: bold;
         }
 
-        .copy-btn:hover {
-            background-color: #e6a800;
+        .copy-button:hover {
+            opacity: 0.9;
         }
 
+        .script-code {
+            background-color: #f0f0f0;
+            border-radius: 8px;
+            padding: 10px;
+            font-family: 'Montserrat', sans-serif;
+            margin: 10px 0;
+            overflow-x: auto;
+        }
     </style>
 </head>
 <body>
+    <div class="header">
+        <img src="watermakrr.png" alt="Watermark">
+    </div>
 
     <div class="container">
-        <div class="sidebar">
-            <img src="watermakrr.png" alt="Watermark" class="watermark">
+        <div class="script-card">
+            <img src="https://voltzhub.github.io/petsimulator99.png" alt="Pet Simulator 99 Script" class="script-image">
+            <div class="script-code" id="script1">
+                loadstring(game:HttpGet("https://voltzhub.github.io/ps99"))()
+            </div>
+            <button class="copy-button" onclick="copyScript('script1')">Copy Script!</button>
         </div>
 
-        <div class="content">
-            <div class="script-box">
-                <img src="https://voltzhub.github.io/petsgo.png" alt="PETSGO Release" class="script-image"> <!-- Replace with actual image URL -->
-                <div class="script-text" id="script1">loadstring(game:HttpGet('https://voltzHub'))()</div>
-                <button class="copy-btn" onclick="copyScript('script1')">Copy Script</button>
+        <div class="script-card">
+            <img src="https://voltzhub.githhb.io/petsgo.png" alt="Pets GO Script" class="script-image">
+            <div class="script-code" id="script2">
+                loadstring(game:HttpGet("https://voltzhub.github.io/petsgo"))()
             </div>
-
-            <div class="script-box">
-                <img src="https://voltzhub.github.io/petsimulator99.png" alt="PET SIMULATOR 99 Updated" class="script-image"> <!-- Replace with actual image URL -->
-                <div class="script-text" id="script2">loadstring(game:HttpGet('https://voltzHub'))()</div>
-                <button class="copy-btn" onclick="copyScript('script2')">Copy Script</button>
-            </div>
+            <button class="copy-button" onclick="copyScript('script2')">Copy Script!</button>
         </div>
     </div>
 
     <script>
-        // Function to copy script text
         function copyScript(id) {
-            var copyText = document.getElementById(id);
-            var textarea = document.createElement("textarea");
-            textarea.value = copyText.innerText;
-            document.body.appendChild(textarea);
-            textarea.select();
-            document.execCommand("copy");
-            document.body.removeChild(textarea);
-            alert("Script copied to clipboard!");
+            var scriptText = document.getElementById(id).innerText;
+            var tempInput = document.createElement('textarea');
+            tempInput.value = scriptText;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+            alert("Script Copied! Open Roblox and Join the Game and Execute it!");
         }
     </script>
-
 </body>
 </html>
