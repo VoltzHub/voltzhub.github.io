@@ -3,13 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Voltz HQ Scripts</title>
+    <title>VoltzHub Scripts</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    
+
     <style>
-        
         body {
             margin: 0;
             padding: 0;
@@ -18,14 +17,25 @@
             font-family: 'Montserrat', sans-serif;
         }
 
-        .container {
-            text-align: center;
-            padding-top: 50px;
+        .header {
+            background-color: white;
+            width: 100%;
+            padding: 10px 0;
+            position: fixed;
+            top: 0;
+            z-index: 999;
+            display: flex;
+            justify-content: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
-        .watermark {
+        .header img {
             width: 150px;
-            margin-bottom: 30px;
+        }
+
+        .container {
+            text-align: center;
+            padding-top: 100px;
         }
 
         .script-card {
@@ -49,7 +59,7 @@
             color: white;
             font-size: 18px;
             padding: 10px 20px;
-            border-radius: 10px;
+            border-radius: 50px;
             cursor: pointer;
             font-family: 'Montserrat', sans-serif;
             font-weight: bold;
@@ -63,29 +73,28 @@
             background-color: #f0f0f0;
             border-radius: 8px;
             padding: 10px;
-            font-family: 'Montserrat', sans-serif; /* Change font to Montserrat */
+            font-family: 'Montserrat', sans-serif;
             margin: 10px 0;
             overflow-x: auto;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Watermark Image -->
-        <img src="https://voltzhub.github.io/watermakrr.png" alt="Watermark" class="watermark">
+    <div class="header">
+        <img src="watermakrr.png" alt="Watermark">
+    </div>
 
-        <!-- Script Card 1 -->
+    <div class="container">
         <div class="script-card">
-            <img src="https://voltzhub.github.io/ps99image.png" alt="Pet Simulator Script" class="script-image">
+            <img src="https://voltzhub.github.io/ps99image.png" alt="Pet Simulator 99 Script" class="script-image">
             <div class="script-code" id="script1">
                 loadstring(game:HttpGet("https://voltzhub.github.io/ps99"))()
             </div>
             <button class="copy-button" onclick="copyScript('script1')">Copy Script!</button>
         </div>
 
-        <!-- Script Card 2 -->
         <div class="script-card">
-            <img src="https://voltzhub.github.io/psgoimage.png" alt="PetsGo Script" class="script-image">
+            <img src="psgoimage.png" alt="Pets GO Script" class="script-image">
             <div class="script-code" id="script2">
                 loadstring(game:HttpGet("https://voltzhub.github.io/petsgo"))()
             </div>
@@ -95,7 +104,6 @@
 
     <script>
         function copyScript(id) {
-            /* Copy the script code */
             var scriptText = document.getElementById(id).innerText;
             var tempInput = document.createElement('textarea');
             tempInput.value = scriptText;
@@ -103,7 +111,7 @@
             tempInput.select();
             document.execCommand('copy');
             document.body.removeChild(tempInput);
-            alert("Script copied to clipboard!");
+            alert("Script Copied! Open Roblox and Join the Game and Execute it!");
         }
     </script>
 </body>
