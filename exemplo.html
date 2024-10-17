@@ -4,94 +4,104 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Script Loader</title>
-    <!-- Google Font: Fredoka One -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap">
     <style>
+        /* Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700;900&display=swap'); /* Placeholder for Gotham */
+
         body {
-            font-family: 'Fredoka One', cursive;
-            background-color: #f0f0f0;
-            text-align: center;
+            margin: 0;
+            padding: 0;
+            background: url('backgroundp99.png') no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Poppins', sans-serif;
         }
 
         .container {
-            width: 80%;
-            margin: auto;
-            margin-top: 50px;
+            text-align: center;
+            padding-top: 50px;
         }
 
-        .script-box {
-            background-color: #ffea7f;
+        .watermark {
+            width: 150px;
+            margin-bottom: 30px;
+        }
+
+        .script-card {
+            background-color: white;
             border-radius: 15px;
+            width: 80%;
+            max-width: 500px;
+            margin: 20px auto;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
             padding: 20px;
-            margin-bottom: 40px;
-            position: relative;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
         }
 
-        .image-bar {
+        .script-image {
             width: 100%;
-            height: 150px;
-            background-size: cover;
-            background-position: center;
             border-radius: 10px;
-            margin-bottom: 20px;
         }
 
-        .code-box {
-            background-color: #fff;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            padding: 15px;
-            font-size: 16px;
-            color: #333;
-            width: 90%;
-            margin: 10px auto;
-            overflow-x: auto;
-            white-space: nowrap;
-        }
-
-        .copy-btn {
-            background-color: #ffb84d;
-            color: #fff;
+        .copy-button {
+            background: linear-gradient(90deg, #FFC417, #FFBB08);
             border: none;
-            border-radius: 5px;
+            color: white;
+            font-size: 18px;
             padding: 10px 20px;
-            font-size: 16px;
+            border-radius: 10px;
             cursor: pointer;
+            font-weight: bold;
         }
 
-        .copy-btn:hover {
-            background-color: #ff9933;
+        .copy-button:hover {
+            opacity: 0.9;
+        }
+
+        .script-code {
+            background-color: #f0f0f0;
+            border-radius: 8px;
+            padding: 10px;
+            font-family: 'Courier New', Courier, monospace;
+            margin: 10px 0;
+            overflow-x: auto;
         }
     </style>
 </head>
 <body>
-
     <div class="container">
-        <!-- First Script Box -->
-        <div class="script-box">
-            <div class="image-bar" style="background-image: url('https://voltzhub.github.io/ps99image.png');"></div>
-            <button class="copy-btn" onclick="copyToClipboard('loadstring(game:HttpGet(\'https://voltzhub.github.io/ps99\'))()')">Copy</button>
+        <!-- Watermark Image -->
+        <img src="https://voltzhub.github.io/watermakrr.png" alt="Watermark" class="watermark">
+
+        <!-- Script Card 1 -->
+        <div class="script-card">
+            <img src="https://voltzhub.github.io/ps99image.png" alt="Pet Simulator Script" class="script-image">
+            <div class="script-code" id="script1">
+                loadstring(game:HttpGet("https://voltzhub.github.io/ps99"))()
+            </div>
+            <button class="copy-button" onclick="copyScript('script1')">Copy Script!</button>
         </div>
 
-        <!-- Second Script Box -->
-        <div class="script-box">
-            <div class="image-bar" style="background-image: url('https://voltzhub.github.io/psgoimage.png');"></div>
-            <button class="copy-btn" onclick="copyToClipboard('loadstring(game:HttpGet(\'https://voltzhub.github.io/petsgo\'))()')">Copy</button>
+        <!-- Script Card 2 -->
+        <div class="script-card">
+            <img src="https://voltzhub.github.io/psgoimage.png" alt="PetsGo Script" class="script-image">
+            <div class="script-code" id="script2">
+                loadstring(game:HttpGet("https://voltzhub.github.io/petsgo"))()
+            </div>
+            <button class="copy-button" onclick="copyScript('script2')">Copy Script!</button>
         </div>
     </div>
 
     <script>
-        function copyToClipboard(text) {
-            const textarea = document.createElement("textarea");
-            textarea.value = text;
-            document.body.appendChild(textarea);
-            textarea.select();
-            document.execCommand("copy");
-            document.body.removeChild(textarea);
+        function copyScript(id) {
+            /* Copy the script code */
+            var scriptText = document.getElementById(id).innerText;
+            var tempInput = document.createElement('textarea');
+            tempInput.value = scriptText;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
             alert("Script copied to clipboard!");
         }
     </script>
-
 </body>
 </html>
