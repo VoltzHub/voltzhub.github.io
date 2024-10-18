@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   VoltzHub™ | Source Code Viewer
+  </title>
+  <link href="/static/css/style.css" rel="stylesheet"/>
+  <link href="/static/images/html-file.png" rel="icon" type="image/png">
+   <!-- <script src="/static/js/dark.js"></script> -->
+   <script>
+    window.addEventListener("load", (event) => {
+            const theme = localStorage.getItem('theme')
+            if (theme == 'light') {
+                changeTheme()
+            }
+        })
+        function changeTheme() {
+            document.body.classList.toggle("light-mode")
+            if(document.body.classList.contains("light-mode")){
+                document.getElementById("icon").src = "https://voltzhub.github.io/watermakrr.png";
+                localStorage.setItem('theme', 'light')
+            }
+            else {
+                document.getElementById("icon").src = "https://voltzhub.github.io/watermakrr.png";
+                localStorage.setItem('theme', 'light')
+            }
+        }
+   </script>
+  </link>
+ </head>
+ <body>
+  <nav>
+   <img alt="sun" id="icon" onclick="changeTheme()" src="https://voltzhub.github.io/watermakrr.png"/>
+  </nav>
+  <main>
+   <div class="card">
+    <h1>
+     VoltzHub Source Code Viewer
+    </h1>
+    <form action="/output/" method="POST">
+     <input name="csrfmiddlewaretoken" type="hidden" value="GJL7A82I1oXgOGO7KQMW7Q7j7Rod5UJQkfaul7eMmwjV9aOzxbLCAA0VNVAaCUzU"/>
+     <input id="wanted_url" name="wanted_url" placeholder="URL" type="url" value=""/>
+     <input type="submit" value="SUBMIT"/>
+    </form>
+   </div>
+   <footer>
+    <p>
+     Build by
+     <a href="https://www.youtube.com/@VoltzHub" target="_blank">
+      VoltzHub™
+     </a>
+     | 2024 |
+     <a href="https://discord.gg/PSFE7bZe" target="_blank">
+      VoltzHQ™
+     </a>
+    </p>
+   </footer>
+  </main>
+ </body>
+</html>
